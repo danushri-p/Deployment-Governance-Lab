@@ -294,3 +294,4 @@ A: Branch protection rules prevent direct pushes to `main`. Environment rules pr
 - [ ] Approval workflow validated
 - [ ] Screenshots or evidence collected
 - [ ] Final report submitted
+new
