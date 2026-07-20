@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - lab
   workflow_dispatch:
 
 jobs:
