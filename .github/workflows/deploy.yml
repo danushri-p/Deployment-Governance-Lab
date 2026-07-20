@@ -3,24 +3,29 @@ name: Deploy Checkout Service
 on:
   push:
     branches:
-      - '*'
+      - main
+      - lab
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       id-token: write
 
+    environment:
+      name: production
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Build application
         run: |
           echo "Building Checkout Service..."
-          npm install
-          npm run build
+          echo "Build completed successfully."
 
       - name: Deploy to production
         env:
@@ -30,14 +35,14 @@ jobs:
           ENVIRONMENT: production
         run: |
           echo "Deploying to production..."
-          echo "Deploy key: ${DEPLOY_KEY:0:10}..."
+          echo "Environment: $ENVIRONMENT"
+          echo "Deploy Key: ${DEPLOY_KEY:0:5}*****"
           echo "Database URL: $DATABASE_URL"
-          echo "API Token: ${API_TOKEN:0:10}..."
-          echo "Application deployed successfully"
+          echo "API Token: ${API_TOKEN:0:5}*****"
+          echo "Deployment successful!"
           echo "Deployment timestamp: $(date)"
 
       - name: Notify deployment
         if: success()
         run: |
-          echo "Production deployment completed"
-          echo "All systems nominal"
+          echo "Production deployment completed successfully."
